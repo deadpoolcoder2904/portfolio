@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deepak Baraskar — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --side-bg:#12181A;
+  --side-ink:#F2F3EF;
+  --side-soft:#8B968F;
+  --side-line:#232B2C;
+  --paper:#F6F4ED;
+  --card:#FFFFFF;
+  --ink:#1C2420;
+  --ink-soft:#66716A;
+  --line:#E6E2D5;
+  --accent:#1F4B3F;
+  --accent-2:#2E6F5E;
+  --accent-soft:#DCE9E3;
+  --c-lang:#2E6F5E;
+  --c-bi:#B08D2E;
+  --c-ml:#4A5FC1;
+  --c-tool:#B5461F;
+  --font-d:'Fraunces', Georgia, serif;
+  --font-b:'IBM Plex Sans', -apple-system, sans-serif;
+  --font-hand:'Caveat', cursive;
+  --radius:10px;
+}
+[data-theme="dark"]{
+  --side-bg:#0E1214;
+  --side-ink:#EDEFEA;
+  --side-soft:#7C8A83;
+  --side-line:#1D2624;
+  --paper:#161C1A;
+  --card:#1D2422;
+  --ink:#EAEDE9;
+  --ink-soft:#8FA098;
+  --line:#2A3330;
+  --accent:#4FD1A8;
+  --accent-2:#4FD1A8;
+  --accent-soft:#213631;
+  --c-lang:#4FD1A8;
+  --c-bi:#F2C14E;
+  --c-ml:#8B9CFF;
+  --c-tool:#FF7A50;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-b);
+  font-size:15.5px; line-height:1.6; transition:background .3s ease,color .3s ease;
+}
+a{color:inherit; text-decoration:none;}
+h1,h2,h3{font-family:var(--font-d); font-weight:600; margin:0;}
+.wrap{display:flex; min-height:100vh;}
+.icon{width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.8; flex:0 0 auto;}
+
+/* progress bar */
+.progress-bar{position:fixed; top:0; left:0; height:3px; z-index:60;
+  background:linear-gradient(90deg,var(--c-lang),var(--c-ml),var(--c-bi),var(--c-tool)); width:0%;}
+
+/* SIDEBAR */
+.side{
+  width:270px; flex:0 0 270px; background:var(--side-bg); color:var(--side-ink);
+  position:sticky; top:0; height:100vh; padding:32px 24px; display:flex; flex-direction:column;
+  justify-content:space-between; overflow-y:auto; transition:background .3s ease;
+}
+.side-name{font-family:var(--font-d); font-size:21px; font-weight:600;}
+.side-role{font-size:12px; color:var(--side-soft); margin-top:8px; line-height:1.5;}
+.side nav{margin-top:34px; display:flex; flex-direction:column; gap:3px;}
+.side nav a{
+  display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:8px;
+  font-size:13.5px; color:var(--side-soft); border-left:2px solid transparent;
+}
+.side nav a:hover{background:rgba(255,255,255,.04); color:var(--side-ink);}
+.side nav a.active{background:var(--accent-2); color:#fff;}
+.side-links{margin-top:28px; padding-top:20px; border-top:1px solid var(--side-line);}
+.side-links .lbl{font-size:11px; letter-spacing:.5px; color:var(--side-soft); margin-bottom:10px;}
+.side-links a{
+  display:flex; align-items:center; gap:10px; padding:9px 10px; border-radius:8px;
+  font-size:13px; color:var(--side-soft); justify-content:space-between;
+}
+.side-links a:hover{background:rgba(255,255,255,.05); color:var(--side-ink);}
+.side-links a .left{display:flex; align-items:center; gap:10px;}
+.side-bottom{margin-top:24px;}
+.dm-row{display:flex; align-items:center; justify-content:space-between; padding:8px 4px; font-size:13px; color:var(--side-soft);}
+.switch{width:38px; height:20px; background:var(--side-line); border-radius:20px; position:relative; cursor:pointer; border:none;}
+.switch .dot{position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:var(--side-ink); transition:transform .25s ease;}
+.switch.on{background:var(--accent-2);}
+.switch.on .dot{transform:translateX(18px);}
+.side-credit{font-size:11px; color:var(--side-soft); margin-top:18px; line-height:1.6;}
+
+/* MAIN */
+main{flex:1; min-width:0;}
+section{padding:70px 56px; border-bottom:1px solid var(--line); max-width:1080px;}
+section:last-of-type{border-bottom:none;}
+.eyebrow{font-size:12.5px; color:var(--accent-2); letter-spacing:.3px; margin-bottom:10px; font-weight:600;}
+.section-title{font-size:26px; margin-bottom:8px;}
+.section-sub{font-size:14px; color:var(--ink-soft); margin-bottom:30px;}
+
+/* HERO */
+#home{padding-top:56px;}
+.badge{
+  display:inline-flex; align-items:center; gap:7px; font-size:12.5px; color:var(--accent-2);
+  background:var(--accent-soft); padding:6px 14px; border-radius:20px; margin-bottom:20px; font-weight:500;
+}
+.badge .pulse{width:7px; height:7px; border-radius:50%; background:var(--accent-2); animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.hero-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:start;}
+.hero-lede{font-size:15px; color:var(--ink-soft); margin-bottom:6px;}
+#home h1{font-size:44px; line-height:1.1;}
+#home h1 .first{color:var(--accent-2);}
+.hero-role{font-size:16px; color:var(--ink-soft); margin-top:14px; font-weight:500;}
+.hero-bio{font-size:14.5px; color:var(--ink-soft); margin-top:16px; max-width:540px;}
+.hero-btns{display:flex; gap:12px; margin-top:26px; flex-wrap:wrap;}
+.btn{
+  border:1px solid var(--accent); padding:12px 22px; font-size:13.5px; border-radius:8px;
+  transition:all .2s ease; position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+}
+.btn-fill{background:var(--accent-2); color:#fff; border-color:var(--accent-2);}
+.btn-fill:hover{background:var(--accent);}
+.btn-outline{color:var(--ink); border-color:var(--line); background:var(--card);}
+.btn-outline:hover{border-color:var(--accent-2); color:var(--accent-2);}
+.social-row{display:flex; gap:10px; margin-top:24px;}
+.social-circle{
+  width:38px; height:38px; border-radius:50%; border:1px solid var(--line); display:flex;
+  align-items:center; justify-content:center; color:var(--ink-soft); transition:all .2s ease;
+}
+.social-circle:hover{border-color:var(--accent-2); color:var(--accent-2); transform:translateY(-2px);}
+
+.hero-right{position:relative;}
+.photo-wrap{position:relative; border-radius:18px; overflow:hidden; aspect-ratio:1/1; background:var(--accent-soft);}
+.photo-wrap::before{
+  content:""; position:absolute; inset:-20%; z-index:0;
+  background:radial-gradient(circle at 30% 20%, var(--c-bi) 0%, transparent 45%),
+             radial-gradient(circle at 80% 80%, var(--c-ml) 0%, transparent 45%);
+  opacity:.35;
+}
+.photo-wrap img{position:relative; z-index:1; width:100%; height:100%; object-fit:cover; object-position:top center;}
+.hand-note{font-family:var(--font-hand); font-size:20px; color:var(--accent-2); margin-top:14px; line-height:1.3; text-align:right;}
+.stat-row{display:flex; flex-direction:column; gap:10px; margin-top:16px;}
+.stat-card{
+  display:flex; align-items:center; gap:12px; background:var(--card); border:1px solid var(--line);
+  border-radius:10px; padding:12px 16px;
+}
+.stat-card .ic{width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:15px; flex:0 0 auto;}
+.stat-card .num{font-family:var(--font-d); font-size:18px; font-weight:600;}
+.stat-card .lbl{font-size:11.5px; color:var(--ink-soft);}
+.stat-card:nth-child(1) .ic{background:var(--c-lang); color:#fff;}
+.stat-card:nth-child(2) .ic{background:var(--c-bi); color:#fff;}
+.stat-card:nth-child(3) .ic{background:var(--c-ml); color:#fff;}
+
+/* two-col sections */
+.two-col{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;}
+.info-row{display:flex; flex-wrap:wrap; gap:22px; margin-top:22px;}
+.info-item{display:flex; align-items:center; gap:9px; font-size:13px; color:var(--ink-soft);}
+.info-item .ic{color:var(--accent-2);}
+.info-item strong{display:block; color:var(--ink); font-size:13.5px; font-weight:500;}
+
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px;}
+.exp-card{display:flex; gap:14px;}
+.exp-logo{
+  width:42px; height:42px; border-radius:9px; background:var(--accent-2); color:#fff; flex:0 0 auto;
+  display:flex; align-items:center; justify-content:center; font-family:var(--font-d); font-weight:600; font-size:14px;
+}
+.exp-role{font-size:15px; font-weight:600;}
+.exp-dates{font-size:12px; color:var(--ink-soft); margin-top:2px;}
+.exp-list{margin:12px 0 0; padding-left:18px; font-size:13.5px; color:var(--ink-soft); display:flex; flex-direction:column; gap:6px;}
+
+/* skills */
+.skill-cats{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+.skill-cat h4{font-size:12px; color:var(--ink-soft); margin-bottom:14px; letter-spacing:.3px;}
+.skill-row{display:flex; align-items:center; gap:10px; padding:9px 0; font-size:13.5px;}
+.skill-chip{
+  width:26px; height:26px; border-radius:7px; display:flex; align-items:center; justify-content:center;
+  font-size:10.5px; font-weight:700; color:#fff; flex:0 0 auto;
+}
+
+/* education & certs */
+.cert-item{display:flex; align-items:center; gap:12px; padding:12px 0; border-top:1px solid var(--line);}
+.cert-item:first-child{border-top:none;}
+.cert-sq{width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:11px; flex:0 0 auto;}
+.cert-title{font-size:13.5px; font-weight:500;}
+.cert-issuer{font-size:11.5px; color:var(--ink-soft);}
+.edu-degree{font-size:15px; font-weight:600; margin-top:14px;}
+.edu-meta{font-size:12.5px; color:var(--ink-soft); margin-top:6px;}
+
+/* projects */
+.proj-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:16px;}
+.proj-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:20px; display:flex; flex-direction:column;}
+.proj-icon{width:38px; height:38px; border-radius:9px; display:flex; align-items:center; justify-content:center; color:#fff; margin-bottom:14px; font-size:16px;}
+.proj-card h3{font-size:15px; margin-bottom:8px;}
+.proj-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;}
+.proj-tags span{font-size:10.5px; padding:3px 9px; border-radius:20px; background:var(--paper); color:var(--ink-soft); border:1px solid var(--line);}
+.proj-desc{font-size:13px; color:var(--ink-soft); flex:1;}
+.proj-more{max-height:0; overflow:hidden; transition:max-height .35s ease; font-size:13px; color:var(--ink-soft); margin-top:8px;}
+.proj-card.open .proj-more{max-height:200px;}
+.proj-link{font-size:12.5px; color:var(--accent-2); margin-top:14px; font-weight:500; cursor:pointer;}
+.proj-card a.proj-link{display:inline-block;}
+
+/* achievements + contact */
+.ach-list{display:flex; flex-direction:column; gap:14px; margin-top:8px;}
+.ach-item{display:flex; gap:12px; align-items:flex-start;}
+.ach-ic{font-size:18px; flex:0 0 auto;}
+.ach-title{font-size:13.5px; font-weight:500;}
+.ach-sub{font-size:12px; color:var(--ink-soft); margin-top:2px;}
+.contact-info{display:flex; flex-direction:column; gap:12px; margin:18px 0 24px;}
+.contact-info .row{display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--ink-soft);}
+.contact-info .ic{color:var(--accent-2);}
+.form-field{margin-bottom:12px;}
+.form-field input, .form-field textarea{
+  width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px; font-family:var(--font-b);
+  font-size:13.5px; background:var(--paper); color:var(--ink); outline:none;
+}
+.form-field input:focus, .form-field textarea:focus{border-color:var(--accent-2);}
+
+footer.site-footer{padding:28px 56px; font-size:12px; color:var(--ink-soft);}
+.top-btn{
+  position:fixed; bottom:24px; right:24px; width:42px; height:42px; border-radius:50%; background:var(--accent-2);
+  color:#fff; border:none; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; z-index:40;
+}
+.top-btn.show{opacity:1; pointer-events:auto;}
+.top-btn:hover{transform:translateY(-3px);}
+.ripple{position:absolute; border-radius:50%; background:rgba(255,255,255,.5); transform:scale(0); animation:ripple .5s ease-out; pointer-events:none;}
+@keyframes ripple{to{transform:scale(3); opacity:0;}}
+.confetti-piece{position:fixed; width:6px; height:6px; border-radius:1px; z-index:200; pointer-events:none; animation:confetti-fall 900ms ease-out forwards;}
+@keyframes confetti-fall{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot)); opacity:0;}}
+
+@media (max-width: 980px){
+  .hero-grid, .two-col{grid-template-columns:1fr;}
+  .skill-cats{grid-template-columns:1fr 1fr;}
+  .proj-grid{grid-template-columns:1fr;}
+}
+@media (max-width: 760px){
+  .wrap{flex-direction:column;}
+  .side{position:sticky; top:0; width:100%; height:auto; flex-direction:row; align-items:center;
+    justify-content:space-between; padding:16px 20px;}
+  .side nav{display:none;}
+  .side-links, .side-bottom{display:none;}
+  section{padding:44px 22px;}
+  #home h1{font-size:32px;}
+  .skill-cats{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="wrap">
+  <aside class="side">
+    <div>
+      <div class="side-name">Deepak Baraskar</div>
+      <div class="side-role">Data Analyst | Data Science Fresher<br>Machine Learning Enthusiast</div>
+      <nav>
+        <a href="#home" class="nav-link active"><svg class="icon" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</a>
+        <a href="#about" class="nav-link"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>About</a>
+        <a href="#experience" class="nav-link"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Experience</a>
+        <a href="#skills" class="nav-link"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2v6M12 16v6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M16 12h6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg>Skills</a>
+        <a href="#projects" class="nav-link"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>Projects</a>
+        <a href="#certifications" class="nav-link"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 14 7 21l5-2.5L17 21l-1.5-7"/></svg>Certifications</a>
+        <a href="#achievements" class="nav-link"><svg class="icon" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 5H5a3 3 0 0 0 3 5M16 5h3a3 3 0 0 1-3 5"/><path d="M12 13v4M9 20h6"/></svg>Achievements</a>
+        <a href="#contact" class="nav-link"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Contact</a>
+      </nav>
+      <div class="side-links">
+        <div class="lbl">QUICK LINKS</div>
+        <a href="https://www.linkedin.com/in/deepak-baraskar-ab9b27293" target="_blank" rel="noopener"><span class="left"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M12 17v-4.5a2 2 0 0 1 4 0V17M12 12.5v4.5"/></svg>LinkedIn</span>→</a>
+        <a href="https://github.com/deadpoolcoder2904" target="_blank" rel="noopener"><span class="left"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.92 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.82-2.35 4.66-4.58 4.91.36.31.68.92.68 1.85v2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>GitHub</span>→</a>
+        <a href="mailto:baraskardeepak960@gmail.com"><span class="left"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</span>→</a>
+      </div>
+    </div>
+    <div class="side-bottom">
+      <div class="dm-row">Dark Mode <button class="switch" id="themeSwitch"><span class="dot"></span></button></div>
+      <div class="side-credit">© 2026 Deepak Baraskar<br>Built with ♥ using HTML, CSS &amp; JS</div>
+    </div>
+  </aside>
+
+  <main>
+    <section id="home">
+      <div class="badge"><span class="pulse"></span>Open to Opportunities</div>
+      <div class="hero-grid">
+        <div>
+          <div class="hero-lede">Hi, I'm</div>
+          <h1><span class="first">Deepak</span> Baraskar</h1>
+          <div class="hero-role">Data Analyst | Data Science Fresher | Machine Learning Enthusiast</div>
+          <p class="hero-bio">I'm a curious data enthusiast who learns by building — dashboards, recommendation systems, and classifiers. I'm open to Data Analyst and Data Scientist roles where I can grow, contribute, and turn raw data into useful decisions.</p>
+          <div class="hero-btns">
+            <a class="btn btn-fill" href="Deepak_Baraskar_Resume.pdf" target="_blank" rel="noopener" id="resumeBtn">↓ View Resume</a>
+            <a class="btn btn-outline" href="#contact">✉ Contact Me</a>
+          </div>
+          <div class="social-row">
+            <a class="social-circle" href="https://www.linkedin.com/in/deepak-baraskar-ab9b27293" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M12 17v-4.5a2 2 0 0 1 4 0V17M12 12.5v4.5"/></svg></a>
+            <a class="social-circle" href="https://github.com/deadpoolcoder2904" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.92 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.82-2.35 4.66-4.58 4.91.36.31.68.92.68 1.85v2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+            <a class="social-circle" href="mailto:baraskardeepak960@gmail.com"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="photo-wrap"><img src="deepak-photo.jpg" alt="Deepak Baraskar"></div>
+          <div class="hand-note">Build. Analyze.<br>Create Impact.</div>
+          <div class="stat-row">
+            <div class="stat-card"><div class="ic">📊</div><div><div class="num" data-target="7">0</div><div class="lbl">Projects Completed</div></div></div>
+            <div class="stat-card"><div class="ic">🎓</div><div><div class="num" data-target="3">0</div><div class="lbl">Certifications</div></div></div>
+            <div class="stat-card"><div class="ic">💚</div><div><div class="num" data-target="7.25" data-decimal="1">0</div><div class="lbl">CGPA (B.Tech)</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="two-col">
+        <div>
+          <div class="eyebrow">About Me</div>
+          <h2 class="section-title">A little about me</h2>
+          <p class="hero-bio">I recently completed my B.Tech in Artificial Intelligence and Data Science from Shree Balaji Institute of Technology and Management, Betul. I have a strong interest in data analysis, machine learning, and building data-driven solutions. I enjoy working with Python, SQL, Power BI, and Excel to solve real business problems — and I edit photographs on the side, partly as an excuse to write image-processing code.</p>
+          <div class="info-row">
+            <div class="info-item"><span class="ic">🎓</span><span><strong>B.Tech (AI &amp; DS)</strong>SBITM, Betul</span></div>
+            <div class="info-item"><span class="ic">📅</span><span><strong>CGPA</strong>7.25</span></div>
+            <div class="info-item"><span class="ic">📍</span><span><strong>Location</strong>Betul, India</span></div>
+            <div class="info-item"><span class="ic">💡</span><span><strong>Interests</strong>Data · Tech · Learning</span></div>
+          </div>
+        </div>
+        <div id="experience">
+          <div class="eyebrow">Experience</div>
+          <h2 class="section-title">Work Experience</h2>
+          <div class="card exp-card">
+            <div class="exp-logo">CS</div>
+            <div>
+              <div class="exp-role">CodSoft — Data Scientist Intern</div>
+              <div class="exp-dates">Remote · June 2025 – September 2025</div>
+              <ul class="exp-list">
+                <li>Benchmarked 4+ ML algorithms via cross-validation and hyperparameter tuning, reaching up to 91% accuracy and a 0.89 F1-score.</li>
+                <li>Improved model accuracy by 30% through EDA, feature engineering, and low-value feature removal.</li>
+                <li>Streamlined 3+ end-to-end ML pipelines covering ingestion, preprocessing, and deployment.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="eyebrow">Skills &amp; Tools</div>
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skill-cats">
+        <div class="skill-cat">
+          <h4>LANGUAGES</h4>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-lang)">Py</span>Python</div>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-lang)">SQL</span>SQL</div>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-lang)">PG</span>PostgreSQL</div>
+        </div>
+        <div class="skill-cat">
+          <h4>BI &amp; VISUALIZATION</h4>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-bi)">BI</span>Power BI</div>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-bi)">XL</span>Excel</div>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-bi)">Pl</span>Plotly / Seaborn</div>
+        </div>
+        <div class="skill-cat">
+          <h4>ML &amp; DATA SCIENCE</h4>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-ml)">sk</span>Scikit-Learn</div>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-ml)">FE</span>Feature Engineering</div>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-ml)">St</span>Statistical Analysis</div>
+        </div>
+        <div class="skill-cat">
+          <h4>TOOLS &amp; OTHERS</h4>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-tool)">Gi</span>Git &amp; GitHub</div>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-tool)">Jn</span>Jupyter Notebook</div>
+          <div class="skill-row"><span class="skill-chip" style="background:var(--c-tool)">Sl</span>Streamlit</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="eyebrow">My Projects</div>
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="proj-grid">
+        <div class="proj-card" data-cat="bi">
+          <div class="proj-icon" style="background:var(--c-bi)">🏦</div>
+          <h3>Banking Loan Risk Dashboard</h3>
+          <div class="proj-tags"><span>SQL</span><span>Power BI</span><span>Python</span></div>
+          <p class="proj-desc">Interactive Power BI dashboard tracking loan approvals, default rates, and borrower risk indicators.</p>
+          <div class="proj-more">SQL-based EDA on customer demographics, income, and credit history surfaced the key default-risk factors; a risk-segmentation model classifies borrowers by financial profile.</div>
+          <span class="proj-link">View Details →</span>
+        </div>
+        <div class="proj-card" data-cat="ml">
+          <div class="proj-icon" style="background:var(--c-ml)">🎬</div>
+          <h3>Movie Recommendation System</h3>
+          <div class="proj-tags"><span>Python</span><span>Scikit-Learn</span><span>Streamlit</span></div>
+          <p class="proj-desc">Hybrid recommender improving recommendation relevance by 35% over 10,000+ interactions.</p>
+          <div class="proj-more">Combines collaborative and content-based filtering with cosine similarity; deployed as a Streamlit app returning picks in under a second.</div>
+          <a class="proj-link" href="https://github.com/deadpoolcoder2904/recommedation-system-for-movie" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <div class="proj-card" data-cat="lang">
+          <div class="proj-icon" style="background:var(--c-lang)">🛡️</div>
+          <h3>Phishing URL Detection</h3>
+          <div class="proj-tags"><span>Python</span><span>Scikit-Learn</span></div>
+          <p class="proj-desc">Classifier flagging phishing websites from URL and page features.</p>
+          <div class="proj-more">Compared Logistic Regression, Decision Tree, and Random Forest models to find the best-generalising classifier.</div>
+          <span class="proj-link">View Details →</span>
+        </div>
+        <div class="proj-card" data-cat="ml">
+          <div class="proj-icon" style="background:var(--c-ml)">🚢</div>
+          <h3>Titanic Survival Prediction</h3>
+          <div class="proj-tags"><span>Python</span><span>Jupyter</span></div>
+          <p class="proj-desc">Classic classification task predicting passenger survival from the Titanic dataset.</p>
+          <div class="proj-more">Built during the CodSoft internship's AI track — data cleaning, feature prep, and a classification model in a Jupyter notebook.</div>
+          <a class="proj-link" href="https://github.com/deadpoolcoder2904/Codsoft-project" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <div class="proj-card" data-cat="bi">
+          <div class="proj-icon" style="background:var(--c-bi)">🌸</div>
+          <h3>Iris Flower Classification</h3>
+          <div class="proj-tags"><span>Python</span><span>Scikit-Learn</span></div>
+          <p class="proj-desc">The classic multi-class classification problem — identifying iris species from flower measurements.</p>
+          <div class="proj-more">A foundational classification exercise covering data exploration and model evaluation basics.</div>
+          <a class="proj-link" href="https://github.com/deadpoolcoder2904/Iris-flower-classification" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <div class="proj-card" data-cat="tool">
+          <div class="proj-icon" style="background:var(--c-tool)">💬</div>
+          <h3>Rule-Based Chatbot</h3>
+          <div class="proj-tags"><span>Python</span></div>
+          <p class="proj-desc">A chatbot that responds using a set of predefined rules and pattern matching.</p>
+          <div class="proj-more">Covers basic conversational-flow logic and response handling without an ML model.</div>
+          <a class="proj-link" href="https://github.com/deadpoolcoder2904/Chatbot-with-rule-based-RESPONSES" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <div class="proj-card" data-cat="lang">
+          <div class="proj-icon" style="background:var(--c-lang)">🎮</div>
+          <h3>Tic-Tac-Toe Game</h3>
+          <div class="proj-tags"><span>Python</span></div>
+          <p class="proj-desc">A playable Tic-Tac-Toe game built for the CodSoft internship's AI track.</p>
+          <div class="proj-more">Covers game-state logic, turn handling, and win-condition checks in plain Python.</div>
+          <a class="proj-link" href="https://github.com/deadpoolcoder2904/tic-tac-toe-" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <div class="two-col">
+        <div>
+          <div class="eyebrow">Education</div>
+          <h2 class="section-title">Where I studied</h2>
+          <div class="card">
+            <div class="edu-degree">B.Tech — Artificial Intelligence &amp; Data Science</div>
+            <div class="edu-meta">Shree Balaji Institute of Technology and Management, Betul<br>2021 – 2025 · CGPA: 7.25</div>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow">Certifications</div>
+          <h2 class="section-title">Coursework completed</h2>
+          <div class="card">
+            <div class="cert-item"><div class="cert-sq" style="background:var(--c-ml)">ML</div><div><div class="cert-title">Machine Learning Specialization</div><div class="cert-issuer">Andrew Ng · Coursera</div></div></div>
+            <div class="cert-item"><div class="cert-sq" style="background:var(--c-lang)">SQL</div><div><div class="cert-title">SQL for Data Analysis</div><div class="cert-issuer">Coursera</div></div></div>
+            <div class="cert-item"><div class="cert-sq" style="background:var(--c-bi)">BI</div><div><div class="cert-title">Power BI for Data Analytics</div><div class="cert-issuer">Microsoft</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements">
+      <div class="two-col">
+        <div>
+          <div class="eyebrow">Achievements</div>
+          <h2 class="section-title">My Highlights</h2>
+          <div class="ach-list">
+            <div class="ach-item"><span class="ach-ic">🏅</span><div><div class="ach-title">Completed B.Tech with CGPA 7.25</div><div class="ach-sub">Shree Balaji Institute of Technology and Management</div></div></div>
+            <div class="ach-item"><span class="ach-ic">⭐</span><div><div class="ach-title">Built 7 real-world data &amp; AI projects</div><div class="ach-sub">Spanning BI dashboards, ML classification, recommender systems, and game logic</div></div></div>
+            <div class="ach-item"><span class="ach-ic">📈</span><div><div class="ach-title">Reached 91% model accuracy</div><div class="ach-sub">During the CodSoft Data Scientist internship</div></div></div>
+            <div class="ach-item"><span class="ach-ic">🚀</span><div><div class="ach-title">Actively learning &amp; upskilling</div><div class="ach-sub">Python, SQL, Power BI, Machine Learning</div></div></div>
+          </div>
+        </div>
+        <div id="contact">
+          <div class="eyebrow">Get in Touch</div>
+          <h2 class="section-title">Let's Connect</h2>
+          <p class="section-sub" style="margin-bottom:0;">Feel free to reach out for opportunities, collaborations, or just to say hi.</p>
+          <div class="contact-info">
+            <div class="row"><span class="ic">✉</span>baraskardeepak960@gmail.com</div>
+            <div class="row"><span class="ic">📞</span>+91-7000559178</div>
+            <div class="row"><span class="ic">📍</span>Betul, Madhya Pradesh, India</div>
+          </div>
+          <form id="contactForm">
+            <div class="form-field"><input type="text" placeholder="Your Name" id="cName" required></div>
+            <div class="form-field"><input type="email" placeholder="Your Email" id="cEmail" required></div>
+            <div class="form-field"><textarea placeholder="Message" rows="3" id="cMsg" required></textarea></div>
+            <button type="submit" class="btn btn-fill" style="width:100%; justify-content:center;">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">Thanks for visiting! · Designed &amp; developed by Deepak Baraskar ♥</footer>
+  </main>
+</div>
+
+<button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
+
+<script>
+// Scroll progress
+const progressBar = document.getElementById('progressBar');
+function updateProgress(){
+  const h = document.documentElement;
+  const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+  progressBar.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateProgress); updateProgress();
+
+// Back to top
+const topBtn = document.getElementById('topBtn');
+window.addEventListener('scroll', () => topBtn.classList.toggle('show', window.scrollY > 500));
+topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// Scroll-spy nav
+const links = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('main section');
+const map = new Map();
+links.forEach(l => map.set(l.getAttribute('href').slice(1), l));
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      links.forEach(l => l.classList.remove('active'));
+      const l = map.get(e.target.id);
+      if(l) l.classList.add('active');
+    }
+  });
+}, {rootMargin:'-35% 0px -55% 0px'});
+sections.forEach(s => obs.observe(s));
+
+// Animated stat counters
+document.querySelectorAll('.num[data-target]').forEach(el => {
+  const target = parseFloat(el.getAttribute('data-target'));
+  const dec = parseInt(el.getAttribute('data-decimal') || '0', 10);
+  let done = false;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting && !done){
+        done = true;
+        const start = performance.now(), dur = 900;
+        function step(now){
+          const p = Math.min((now-start)/dur, 1);
+          const val = target * (1 - Math.pow(1-p,3));
+          el.textContent = (dec ? val.toFixed(dec) : Math.round(val)) + (target>=10 && dec===0 && el.nextSibling ? '+' : (dec===0 && target<10 ? '+' : ''));
+          if(p < 1) requestAnimationFrame(step);
+          else el.textContent = (dec ? target.toFixed(dec) : target + '+');
+        }
+        requestAnimationFrame(step);
+      }
+    });
+  }, {threshold:0.4});
+  io.observe(el);
+});
+
+// Project card expand
+document.querySelectorAll('.proj-link').forEach(link => {
+  if(link.tagName === 'A') return;
+  link.addEventListener('click', () => {
+    const card = link.closest('.proj-card');
+    card.classList.toggle('open');
+    link.textContent = card.classList.contains('open') ? 'Show less ←' : 'View Details →';
+  });
+});
+
+// Theme toggle
+const themeSwitch = document.getElementById('themeSwitch');
+themeSwitch.addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  themeSwitch.classList.toggle('on', !isDark);
+});
+
+// Ripple on buttons
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const span = document.createElement('span');
+    span.className = 'ripple';
+    span.style.left = (e.clientX - rect.left - 8) + 'px';
+    span.style.top = (e.clientY - rect.top - 8) + 'px';
+    span.style.width = span.style.height = '16px';
+    btn.appendChild(span);
+    setTimeout(() => span.remove(), 500);
+  });
+});
+
+// Confetti on resume click
+function burstConfetti(x, y){
+  const colors = ['--c-lang','--c-ml','--c-bi','--c-tool'];
+  for(let i=0;i<18;i++){
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    const color = getComputedStyle(document.documentElement).getPropertyValue(colors[i % colors.length]).trim();
+    piece.style.background = color;
+    piece.style.left = x + 'px'; piece.style.top = y + 'px';
+    const angle = Math.random()*Math.PI*2, dist = 60 + Math.random()*60;
+    piece.style.setProperty('--dx', Math.cos(angle)*dist + 'px');
+    piece.style.setProperty('--dy', Math.sin(angle)*dist + 'px');
+    piece.style.setProperty('--rot', (Math.random()*360) + 'deg');
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 950);
+  }
+}
+document.getElementById('resumeBtn').addEventListener('click', (e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  burstConfetti(rect.left + rect.width/2, rect.top + rect.height/2);
+});
+
+// Contact form -> mailto
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('cName').value;
+  const email = document.getElementById('cEmail').value;
+  const msg = document.getElementById('cMsg').value;
+  const body = encodeURIComponent(`From: ${name} (${email})\n\n${msg}`);
+  window.location.href = `mailto:baraskardeepak960@gmail.com?subject=Portfolio contact from ${encodeURIComponent(name)}&body=${body}`;
+});
+</script>
+</body>
+</html>
